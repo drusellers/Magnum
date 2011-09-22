@@ -12,7 +12,9 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Specs
 {
-	using NUnit.Framework;
+    using System;
+    using Engine;
+    using NUnit.Framework;
 	using TestFramework;
 
 
@@ -21,11 +23,12 @@ namespace Magnum.Routing.Specs
 	public class When_a_delegate_route_is_bound
 	{
 		bool _called;
-		RoutingEngine<int> _router;
+		RoutingEngine<Uri> _router;
 
 		[Given]
 		public void A_delegate_route()
 		{
+            _router = new MagnumRoutingEngine<Uri>(x=>x);
 			_called = false;
 
 			_router.Bind("/version", x => _called = true);
