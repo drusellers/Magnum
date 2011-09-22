@@ -72,7 +72,8 @@ namespace Magnum.Routing.Specs
 			var equals = new EqualNode<Uri>(() => _id++);
 
             //this alpha node has nothing to do. so we hit it and then 'thbbbb'
-			equals.Add("version", new AlphaNode<Uri>(_id++));
+		    var alphaNode = new AlphaNode<Uri>(_id++);
+		    equals.Add("version", alphaNode);
 			segmentNode.Add(equals);
 
 

@@ -20,7 +20,7 @@ namespace Magnum.Routing.Engine.Nodes
 	/// and starts the journey into the right side join network
 	/// </summary>
 	[DebuggerDisplay("Alpha:{_id}")]
-	public class AlphaNode<TContext> :
+    public class AlphaNode<TContext> : //TODO: is an Alpha node aka Alpha Memory as depicted here: http://en.wikipedia.org/wiki/File:Rete.svg
 		ActivationNode<TContext>,
 		Activation<TContext>
 	{
@@ -41,6 +41,8 @@ namespace Magnum.Routing.Engine.Nodes
             // 
 			context.AddRightActivation(_id);
 			context.AddAction(() => Next(context, value));
+
+            //DRU: I have hit an alpha node. This is the end of the Alpha network.
 		}
 	}
 }

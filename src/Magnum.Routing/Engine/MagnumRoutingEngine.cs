@@ -37,7 +37,7 @@ namespace Magnum.Routing.Engine
 
 			_network.Activate(routeContext, uri.PathAndQuery);
 
-			routeContext.Resolve();
+			routeContext.Resolve(); //TODO: this NEVER addes to the _routes
 
 			RouteMatch<TContext> matched = routeContext.Match;
 			if (matched == null)
