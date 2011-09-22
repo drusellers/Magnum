@@ -47,7 +47,7 @@ namespace Magnum.Routing.Engine
 		}
 
         /// <summary>
-        /// This pattern is trying to be a lightweight visitor, as the full visitor pattern
+        /// This pattern is a lightweight visitor, as the full visitor pattern
         /// was too heavy.
         /// </summary>
 		public IEnumerable<T> Match<T>()
