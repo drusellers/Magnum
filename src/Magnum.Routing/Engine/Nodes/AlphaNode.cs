@@ -12,10 +12,14 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
-	/// <summary>
+    using System.Diagnostics;
+
+
+    /// <summary>
 	/// An alpha node marks the end of a branch in the left side discrimination network
 	/// and starts the journey into the right side join network
 	/// </summary>
+	[DebuggerDisplay("Alpha:{_id}")]
 	public class AlphaNode<TContext> :
 		ActivationNode<TContext>,
 		Activation<TContext>

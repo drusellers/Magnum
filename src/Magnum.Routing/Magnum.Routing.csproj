@@ -88,7 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Engine\RouteContext.cs" />
-    <Compile Include="Engine\RouteContextImpl.cs" />
+    <Compile Include="Engine\RoutingContext.cs" />
     <Compile Include="Model\RouteImpl.cs" />
     <Compile Include="RouteMatch.cs" />
     <Compile Include="Engine\RouteMatchImpl.cs" />

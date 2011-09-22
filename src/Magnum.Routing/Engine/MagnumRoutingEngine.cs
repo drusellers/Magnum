@@ -20,20 +20,20 @@ namespace Magnum.Routing.Engine
 	public class MagnumRoutingEngine<TContext> :
 		RoutingEngine<TContext>
 	{
-		readonly Func<TContext, Uri> _getUri;
+		readonly Func<TContext, Uri> _extractUriFromContext;
 		readonly Activation<TContext> _network;
 
-		public MagnumRoutingEngine(Func<TContext, Uri> getUri)
+		public MagnumRoutingEngine(Func<TContext, Uri> extractUriFromContext)
 		{
-			_getUri = getUri;
+			_extractUriFromContext = extractUriFromContext;
 			_network = new RootNode<TContext>();
 		}
 
 		public void Route(TContext context, Action<RouteMatch<TContext>> callback)
 		{
-			Uri uri = _getUri(context);
+			Uri uri = _extractUriFromContext(context);
 
-			var routeContext = new RouteContextImpl<TContext>(context, uri);
+			var routeContext = new RoutingContext<TContext>(context, uri);
 
 			_network.Activate(routeContext, uri.PathAndQuery);
 

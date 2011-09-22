@@ -13,10 +13,13 @@
 namespace Magnum.Routing.Engine.Nodes
 {
 	using System;
+	using System.Diagnostics;
+
 
     /// <summary>
 	/// Matches segment content and if they 'equal', it passes to the next condition
     /// </summary>
+    [DebuggerDisplay("Equals: {KeyList}")]
 	public class EqualNode<TContext> :
 		DictionaryNode<TContext>,
 		Activation<TContext>

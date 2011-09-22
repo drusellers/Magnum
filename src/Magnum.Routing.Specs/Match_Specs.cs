@@ -65,6 +65,7 @@ namespace Magnum.Routing.Specs
 		[TestFixtureSetUp]
 		public void Given_an_existing_segment_condition()
 		{
+            //here we are just using a simple context - where its just the uri.
 			_engine = new MagnumRoutingEngine<Uri>(x => x);
 
 			var segmentNode = new SegmentNode<Uri>(1);

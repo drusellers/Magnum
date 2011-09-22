@@ -76,5 +76,15 @@ namespace Magnum.Routing.Engine.Nodes
 		{
 			return _values.Values.SelectMany(alphaNode => alphaNode.Match<T>());
 		}
+
+	    protected IEnumerable<string> Keys
+	    {
+	        get { return _values.Keys.ToArray(); }
+	    }
+
+	    protected string KeyList
+	    {
+	        get { return Keys.Aggregate((a, b) => a + " " + b); }
+	    }
 	}
 }

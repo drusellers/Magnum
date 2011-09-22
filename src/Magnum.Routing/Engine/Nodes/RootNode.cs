@@ -12,6 +12,10 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
+    /// <summary>
+    /// There is only ever one RootNode. In theory this could be implemented as a 'singleton'.
+    /// This is the entry point into the network.
+    /// </summary>
 	public class RootNode<TContext> :
 		ActivationNode<TContext>,
 		Activation<TContext>

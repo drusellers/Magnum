@@ -17,7 +17,7 @@ namespace Magnum.Routing.Engine.Nodes
     /// <summary>
 	/// Matches a positional segment in the URI if it exists, and passes to the next condition
 	/// </summary>
-	[DebuggerDisplay("Segment:{_position}")]
+	[DebuggerDisplay("Segment: Pos {_position}")]
 	public class SegmentNode<TContext> :
 		ActivationNode<TContext>,
 		Activation<TContext>

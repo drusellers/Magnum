@@ -17,18 +17,21 @@ namespace Magnum.Routing.Engine
 	using System.Diagnostics;
 
 
+    /// <summary>
+    /// The built in routing context used by magnum.routing.
+    /// </summary>
     [DebuggerDisplay("Context:{_uri}")]
-	public class RouteContextImpl<TContext> :
+	public class RoutingContext<TContext> :
 		RouteContext<TContext>
 	{
 		readonly IList<Action> _actions;
 		readonly TContext _context;
-		readonly HashSet<long> _rights;
+		readonly HashSet<long> _rights; //TODO: this isn't really used - as in nothing is reading it.
 		readonly IList<Route<TContext>> _routes;
 		readonly string[] _segments;
 		readonly Uri _uri;
 
-		public RouteContextImpl(TContext context, Uri uri)
+		public RoutingContext(TContext context, Uri uri)
 		{
 			_context = context;
 			_uri = uri;
