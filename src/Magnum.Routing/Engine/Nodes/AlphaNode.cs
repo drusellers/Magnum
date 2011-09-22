@@ -20,6 +20,7 @@ namespace Magnum.Routing.Engine.Nodes
 		ActivationNode<TContext>,
 		Activation<TContext>
 	{
+        //this is used so the node can ask for their context data.
 		readonly long _id;
 
 		public AlphaNode(long id)
@@ -29,6 +30,11 @@ namespace Magnum.Routing.Engine.Nodes
 
 		public void Activate(RouteContext<TContext> context, string value)
 		{
+            //TODO: what is going on here? - why isn't this one call?
+            // facts / data  - normal rete network.
+            // data / facts sit on the node.
+            // we don't want to store state on the nodes - because we are building a routing / stateless network
+            // 
 			context.AddRightActivation(_id);
 			context.AddAction(() => Next(context, value));
 		}

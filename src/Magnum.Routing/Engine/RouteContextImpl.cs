@@ -14,8 +14,10 @@ namespace Magnum.Routing.Engine
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Diagnostics;
 
 
+    [DebuggerDisplay("Context:{_uri}")]
 	public class RouteContextImpl<TContext> :
 		RouteContext<TContext>
 	{

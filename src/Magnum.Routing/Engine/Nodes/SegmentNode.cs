@@ -12,9 +12,12 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
-	/// <summary>
+    using System.Diagnostics;
+
+    /// <summary>
 	/// Matches a positional segment in the URI if it exists, and passes to the next condition
 	/// </summary>
+	[DebuggerDisplay("Segment:{_position}")]
 	public class SegmentNode<TContext> :
 		ActivationNode<TContext>,
 		Activation<TContext>
@@ -37,6 +40,8 @@ namespace Magnum.Routing.Engine.Nodes
 			if (segmentValue == null)
 				return;
 
+
+            //we found a uri segment at _position, so continue
 			Next(context, segmentValue);
 		}
 	}

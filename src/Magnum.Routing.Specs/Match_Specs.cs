@@ -46,9 +46,17 @@ namespace Magnum.Routing.Specs
 		[Test]
 		public void Should_route_the_url()
 		{
+            var shouldHaveRouted = false;
+
 			var uri = new Uri("http://localhost/version");
 
-			_engine.Route(uri, x => { Trace.WriteLine("Hello"); });
+			_engine.Route(uri, x =>
+			    {
+                    shouldHaveRouted = true;
+			        Trace.WriteLine("Hello");
+			    });
+
+		    shouldHaveRouted.ShouldBeTrue();
 		}
 
 		MagnumRoutingEngine<Uri> _engine;
@@ -61,6 +69,8 @@ namespace Magnum.Routing.Specs
 
 			var segmentNode = new SegmentNode<Uri>(1);
 			var equals = new EqualNode<Uri>(() => _id++);
+
+            //this alpha node has nothing to do. so we hit it and then 'thbbbb'
 			equals.Add("version", new AlphaNode<Uri>(_id++));
 			segmentNode.Add(equals);
 

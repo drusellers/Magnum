@@ -46,6 +46,10 @@ namespace Magnum.Routing.Engine
 			callback(matched);
 		}
 
+        /// <summary>
+        /// This pattern is trying to be a lightweight visitor, as the full visitor pattern
+        /// was too heavy.
+        /// </summary>
 		public IEnumerable<T> Match<T>()
 			where T : class
 		{

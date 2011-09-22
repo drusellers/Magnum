@@ -14,7 +14,9 @@ namespace Magnum.Routing.Engine.Nodes
 {
 	using System;
 
-
+    /// <summary>
+	/// Matches segment content and if they 'equal', it passes to the next condition
+    /// </summary>
 	public class EqualNode<TContext> :
 		DictionaryNode<TContext>,
 		Activation<TContext>
@@ -28,6 +30,7 @@ namespace Magnum.Routing.Engine.Nodes
 
 		public void Activate(RouteContext<TContext> context, string value)
 		{
+            //calls to the base DictionaryNode to perform the equals. odd.
 			Next(value, context, value);
 		}
 
