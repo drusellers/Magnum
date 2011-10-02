@@ -12,7 +12,10 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing
 {
-	public interface RouteMatch
+    using Model;
+
+
+    public interface RouteMatch
 	{
 	}
 
@@ -21,5 +24,6 @@ namespace Magnum.Routing
 		RouteMatch
 	{
 		TContext Context { get; }
+        RouteVariables Data { get; }
 	}
 }

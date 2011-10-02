@@ -10,36 +10,46 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace Magnum.Routing
+namespace Magnum.Routing.Configuration
 {
-	using System;
-	using System.Collections.Generic;
-	using Model;
+    using System;
+    using System.Linq;
+    using Model;
 
 
-	public class UrlPatternParser
+    public class UrlPatternParser
 	{
 		const char BeginParameter = '{';
+        string EncodedBeginParameter = "%7B";
 		const char EndParameter = '}';
+        string EncodedEndParameter = "%7D";
 		const char SegmentSeparator = '/';
 
-		public IEnumerable<RouteParameter> Parse(UrlPattern pattern)
+		public RouteSpecification Parse(UrlPattern pattern)
 		{
-			IList<RouteParameter> parameters = new List<RouteParameter>();
+		    var spec = new RouteSpecification();
+		    int i = 0;
+		    foreach (var segment in pattern.GetSegments().Skip(1)) //skipping the root '/'
+		    {
+		        i = i + 1;
+		        var s = segment.Replace("/","");
+                //this needs to be cleaned up.
+		        if(s.StartsWith(EncodedBeginParameter))
+		        {
+                    //strip off encoded { }
+		            s = s.Replace(EncodedBeginParameter,"").Replace(EncodedEndParameter,"");
+		            spec.AddParameter(new VariableRouteParameter(i, s));
+		        }
+                else
+		        {
+		            spec.AddParameter(new StaticRouteParameter(i, s));
+		        }
+		    }
 
-			ParsePattern(pattern.ToString(), parameterName => { parameters.Add(new RouteParameterImpl(parameterName)); });
-
-			return parameters;
+			return spec;
 		}
 
-		void ParsePattern(string value, Action<string> parameterCallback)
-		{
-			int index = 0;
-			int segment = 0;
-			ParsePattern(value, ref index, ref segment, parameterCallback);
-		}
-
-		void ParsePattern(string value, ref int index, ref int segment, Action<string> parameterCallback)
+		void ParsePattern(string value, ref int index, ref int segment, RouteSpecification spec)
 		{
 			int length = value.Length;
 
@@ -53,7 +63,7 @@ namespace Magnum.Routing
 					if (doubled)
 						index++;
 					else
-						ParseParameter(value, ref index, parameterCallback);
+						ParseParameter(value, ref index, spec);
 				}
 				else if (ch == SegmentSeparator)
 					segment++;
@@ -62,7 +72,7 @@ namespace Magnum.Routing
 			}
 		}
 
-		void ParseParameter(string value, ref int index, Action<string> parameterCallback)
+		void ParseParameter(string value, ref int index, RouteSpecification spec)
 		{
 			if (value[index] != BeginParameter)
 				return;
@@ -78,7 +88,7 @@ namespace Magnum.Routing
 				if (value[index] == EndParameter)
 				{
 					string name = value.Substring(start, index - start);
-					parameterCallback(name);
+				    spec.AddParameter(new VariableRouteParameter(1, name));
 					return;
 				}
 

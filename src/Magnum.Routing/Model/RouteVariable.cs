@@ -12,6 +12,7 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Model
 {
+    //the value of stuff
 	public interface RouteVariable
 	{
 		string Name { get; }

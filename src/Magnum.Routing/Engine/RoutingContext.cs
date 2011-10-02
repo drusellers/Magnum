@@ -15,6 +15,8 @@ namespace Magnum.Routing.Engine
 	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
+	using System.Linq;
+	using Model;
 
 
     /// <summary>
@@ -37,6 +39,7 @@ namespace Magnum.Routing.Engine
 			_uri = uri;
 
 			_segments = _uri.Segments;
+		    Data = new Dictionary<string, object>();
 
 			_rights = new HashSet<long>();
 			_routes = new List<Route<TContext>>();
@@ -50,7 +53,8 @@ namespace Magnum.Routing.Engine
 				if (_routes.Count == 0)
 					return null;
 
-				return new RouteMatchImpl<TContext>(_context, _routes[0]);
+			    var vars = Data.Select(x => new RouteVariableImpl(x.Key, x.Value));
+				return new RouteMatchImpl<TContext>(_context, _routes[0], new RouteVariablesImpl(vars));
 			}
 		}
 
@@ -59,7 +63,9 @@ namespace Magnum.Routing.Engine
 			get { return _context; }
 		}
 
-		public void AddRightActivation(long id)
+        public IDictionary<string, object> Data { get; set; }
+
+        public void AddRightActivation(long id)
 		{
 			_rights.Add(id);
 		}
@@ -96,4 +102,28 @@ namespace Magnum.Routing.Engine
 				_actions[i]();
 		}
 	}
+
+
+    public class RouteVariableImpl :
+        RouteVariable
+    {
+        public RouteVariableImpl(string name, object value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public object Value
+        {
+            get;
+            set;
+        }
+
+    }
 }

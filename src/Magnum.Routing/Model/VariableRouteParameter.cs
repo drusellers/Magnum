@@ -12,14 +12,20 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Model
 {
-	class RouteParameterImpl :
+    using System.Diagnostics;
+
+
+    [DebuggerDisplay("Var:{Value}")]
+	class VariableRouteParameter :
 		RouteParameter
 	{
-		public RouteParameterImpl(string name)
+		public VariableRouteParameter(int segmentIndex, string name)
 		{
-			Name = name;
+		    SegmentIndex = segmentIndex;
+		    Value = name;
 		}
 
-		public string Name { get; private set; }
+        public int SegmentIndex { get; set; }
+        public string Value { get; private set; }
 	}
 }

@@ -12,18 +12,23 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine
 {
-	public class RouteMatchImpl<TContext> :
+    using Model;
+
+
+    public class RouteMatchImpl<TContext> :
 		RouteMatch<TContext>
 	{
-		readonly Route<TContext> _route;
+        readonly Route<TContext> _route;
 		readonly TContext _context;
 
-		public RouteMatchImpl(TContext context, Route<TContext> route)
+		public RouteMatchImpl(TContext context, Route<TContext> route, RouteVariables data)
 		{
-			_context = context;
+		    Data = data;
+		    _context = context;
 			_route = route;
 		}
 
+        public RouteVariables Data { get; set; }
 		public Route<TContext> Route
 		{
 			get { return _route; }

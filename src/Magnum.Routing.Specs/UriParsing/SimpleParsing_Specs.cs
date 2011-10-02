@@ -1,20 +1,22 @@
 namespace Magnum.Routing.Specs.UriParsing
 {
 	using System;
+	using Configuration;
+	using Model;
 	using TestFramework;
 
 
 	[Scenario]
 	public class SimpleParsing_Specs
 	{
-		Uri _base = new Uri("http://localhost");
-
 		[Then]
-		public void Should_parse_query_string()
+		public void Should_parse_tokens()
 		{
-			var builder = new Uri(_base, "version");
-
-			builder.AbsolutePath.ShouldEqual("/version");
+		    var x = new UrlPatternParser();
+		    var o = x.Parse(new UrlPattern("/agent/version/{id}"));
+            //1
+            //2
+            //3
 		}
 	}
 }

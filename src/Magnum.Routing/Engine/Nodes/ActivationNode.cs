@@ -15,7 +15,7 @@ namespace Magnum.Routing.Engine.Nodes
 	using System.Collections.Generic;
 	using System.Linq;
 
-
+    //this is a hybrid node. alpha / match
 	public abstract class ActivationNode<TContext> :
 		Node<TContext>
 	{
@@ -43,7 +43,7 @@ namespace Magnum.Routing.Engine.Nodes
 				_activations[i].Activate(context, value);
 		}
 
-		public void Add(Activation<TContext> activation)
+		public void AddActivation(Activation<TContext> activation)
 		{
 			_activations.Add(activation);
 		}

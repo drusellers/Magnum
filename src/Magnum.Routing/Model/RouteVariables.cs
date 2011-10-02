@@ -15,6 +15,9 @@ namespace Magnum.Routing.Model
 	using System.Collections.Generic;
 
 
+    /// <summary>
+    /// Are specified (declared) at compile time
+    /// </summary>
 	public interface RouteVariables :
 		IEnumerable<RouteVariable>
 	{

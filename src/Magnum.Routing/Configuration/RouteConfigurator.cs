@@ -12,11 +12,11 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Configuration
 {
-	using System;
-	using Builders;
+    using System;
+    using Magnum.Routing.Configuration.Builders;
 
 
-	public interface RouteConfigurator<TContext>
+    public interface RouteConfigurator<TContext>
 	{
 		void UseBuilder(Func<Route, RouteBuilder<TContext>> builderFactory);
 	}

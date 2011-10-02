@@ -74,7 +74,7 @@ namespace Magnum.Routing.Specs
             //this alpha node has nothing to do. so we hit it and then 'thbbbb'
 		    var alphaNode = new AlphaNode<Uri>(_id++);
 		    equals.Add("version", alphaNode);
-			segmentNode.Add(equals);
+			segmentNode.AddActivation(equals);
 
 
 			_engine.Add(segmentNode);

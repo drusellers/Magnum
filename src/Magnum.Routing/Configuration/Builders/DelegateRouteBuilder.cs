@@ -10,12 +10,12 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace Magnum.Routing.Builders
+namespace Magnum.Routing.Configuration.Builders
 {
-	using System;
+    using System;
 
 
-	public class DelegateRouteBuilder<TContext> :
+    public class DelegateRouteBuilder<TContext> :
 		RouteBuilder<TContext>
 	{
 		readonly Action<TContext> _callback;

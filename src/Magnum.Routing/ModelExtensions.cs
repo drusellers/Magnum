@@ -15,6 +15,7 @@ namespace Magnum.Routing
 	using System;
 	using System.Linq.Expressions;
 	using System.Reflection;
+	using Configuration;
 	using Model;
 
 

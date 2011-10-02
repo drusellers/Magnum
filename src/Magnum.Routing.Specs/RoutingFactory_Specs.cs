@@ -13,6 +13,7 @@
 namespace Magnum.Routing.Specs
 {
 	using System;
+	using Configuration;
 	using NUnit.Framework;
 	using TestFramework;
 

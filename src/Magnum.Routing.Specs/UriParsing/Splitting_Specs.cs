@@ -12,7 +12,8 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Specs.UriParsing
 {
-	using Model;
+    using Exceptions;
+    using Model;
 	using NUnit.Framework;
 	using TestFramework;
 

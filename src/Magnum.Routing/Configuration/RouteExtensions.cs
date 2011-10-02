@@ -10,14 +10,13 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace Magnum.Routing
+namespace Magnum.Routing.Configuration
 {
-	using System;
-	using Builders;
-	using Configuration;
+    using System;
+    using Builders;
 
 
-	public static class RouteExtensions
+    public static class RouteExtensions
 	{
 		public static RouteConfigurator<T> Route<T>(this RoutingEngineConfigurator<T> configurator, string path)
 			where T : class

@@ -13,19 +13,19 @@
 namespace Magnum.Routing.Engine
 {
 	using System;
+	using System.Collections.Generic;
 
-
-	public interface RouteContext
+    public interface RouteContext
 	{
 		string Segment(int position);
 	}
-
 
 	public interface RouteContext<TContext> :
 		RouteContext
 	{
 		TContext Context { get; }
-		void AddRightActivation(long id);
+        IDictionary<string, object> Data { get; }
+	    void AddRightActivation(long id);
 		bool HasRightActivation(long id);
 		void AddRoute(Route<TContext> route);
 		void AddAction(Action action);

@@ -10,15 +10,15 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace Magnum.Routing
+namespace Magnum.Routing.Configuration
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using Model;
+    using System;
+    using System.Linq;
+    using Exceptions;
+    using Magnum.Routing.Model;
 
 
-	public class RouteFactory
+    public class RouteFactory
 	{
 		static RouteFactory _instance;
 		readonly UrlPatternParser _parser;
@@ -38,9 +38,9 @@ namespace Magnum.Routing
 		{
 			try
 			{
-				IEnumerable<RouteParameter> parameters = _parser.Parse(pattern);
+				var routeSpecification = _parser.Parse(pattern);
 
-				var routeDefinition = new RouteImpl(pattern, parameters, Enumerable.Empty<RouteVariable>());
+				var routeDefinition = new RouteImpl(pattern, routeSpecification.Parameters, Enumerable.Empty<RouteVariable>());
 
 				return routeDefinition;
 			}

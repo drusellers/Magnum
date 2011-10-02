@@ -36,11 +36,11 @@ namespace Magnum.Routing.Engine.Nodes
 				if (alphaNode == null)
 				{
 					alphaNode = new AlphaNode<TContext>(generateId());
-					alphaNode.Add(existing);
+					alphaNode.AddActivation(existing);
 					_values[value] = alphaNode;
 				}
 
-				alphaNode.Add(activation);
+				alphaNode.AddActivation(activation);
 				return;
 			}
 

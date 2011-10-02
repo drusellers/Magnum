@@ -24,7 +24,7 @@ namespace Magnum.Routing.Model
 
 		public RouteParametersImpl(IEnumerable<RouteParameter> parameters)
 		{
-			_values = new DictionaryCache<string, RouteParameter>(x => x.Name, parameters);
+			_values = new DictionaryCache<string, RouteParameter>(x => x.Value, parameters);
 		}
 
 		public RouteParameter this[string name]

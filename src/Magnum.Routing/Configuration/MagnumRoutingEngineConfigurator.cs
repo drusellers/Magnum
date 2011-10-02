@@ -12,14 +12,15 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Configuration
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq.Expressions;
-	using System.Reflection;
-	using Builders;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using Magnum.Routing.Configuration.Builders;
+    using Magnum.Routing.Exceptions;
 
 
-	public class MagnumRoutingEngineConfigurator<TContext> :
+    public class MagnumRoutingEngineConfigurator<TContext> :
 		RoutingEngineConfigurator<TContext>
 		where TContext : class
 	{

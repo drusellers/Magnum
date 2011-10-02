@@ -10,15 +10,15 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace Magnum.Routing.Builders
+namespace Magnum.Routing.Configuration.Builders
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq.Expressions;
-	using Engine;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using Magnum.Routing.Engine;
 
 
-	public class MagnumRoutingEngineBuilder<TContext> :
+    public class MagnumRoutingEngineBuilder<TContext> :
 		RoutingEngineBuilder<TContext>
 		where TContext : class
 	{
