@@ -12,6 +12,7 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
+    using System;
     using System.Diagnostics;
 
 
@@ -20,10 +21,11 @@ namespace Magnum.Routing.Engine.Nodes
 	/// and starts the journey into the right side join network
 	/// </summary>
 	[DebuggerDisplay("Alpha:{_id}")]
-    public class AlphaNode<TContext> : //TODO: is an Alpha node aka Alpha Memory as depicted here: http://en.wikipedia.org/wiki/File:Rete.svg
+    public class AlphaNode<TContext> : 
 		ActivationNode<TContext>,
-		Activation<TContext>
-	{
+		Activation<TContext>,
+        RightActivation<TContext>
+    {
         //this is used so the node can ask for their context data.
 		readonly long _id;
 
@@ -44,5 +46,10 @@ namespace Magnum.Routing.Engine.Nodes
 
             //DRU: I have hit an alpha node. This is the end of the Alpha network.
 		}
-	}
+
+        public void RightActivate(RouteContext<TContext> context, Action<RouteContext> callback)
+        {
+            callback(context);
+        }
+    }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Benchmarks\RegularExpressions\ParameterizedWebRoutingRoutingRunner.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Join_Specs.cs" />
+    <Compile Include="Join_Var_Specs.cs" />
     <Compile Include="RoutingFactory_Specs.cs" />
     <Compile Include="StubHttpResponseForRouting.cs" />
     <Compile Include="StubHttpContextForRouting.cs" />

@@ -54,7 +54,7 @@ namespace Magnum.Routing.Engine
 					return null;
 
 			    var vars = Data.Select(x => new RouteVariableImpl(x.Key, x.Value));
-				return new RouteMatchImpl<TContext>(_context, _routes[0], new RouteVariablesImpl(vars));
+				return new RouteMatchImpl<TContext>(_context, _routes.Last(), new RouteVariablesImpl(vars));
 			}
 		}
 

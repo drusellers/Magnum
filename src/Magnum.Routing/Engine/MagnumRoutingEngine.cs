@@ -14,6 +14,7 @@ namespace Magnum.Routing.Engine
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Nodes;
 
 
@@ -55,5 +56,10 @@ namespace Magnum.Routing.Engine
 		{
 			return _network.Match<T>();
 		}
+
+	    public RootNode<TContext> Root
+	    {
+	        get { return Match<RootNode<TContext>>().Single(); }
+	    }
 	}
 }

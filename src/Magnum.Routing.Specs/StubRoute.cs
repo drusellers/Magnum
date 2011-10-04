@@ -13,13 +13,27 @@
 namespace Magnum.Routing.Specs
 {
 	using System;
+	using System.Diagnostics;
 	using Model;
 
 
+    [DebuggerDisplay("StubRoute:{_name}")]
 	public class StubRoute<T> :
 		Route<T>
 	{
-		public string Url
+	    string _name;
+
+	    public StubRoute()
+	    {
+	        _name = Guid.NewGuid().ToString();
+	    }
+
+	    public StubRoute(string name)
+	    {
+	        _name = name;
+	    }
+
+	    public string Url
 		{
 			get { throw new NotImplementedException(); }
 		}

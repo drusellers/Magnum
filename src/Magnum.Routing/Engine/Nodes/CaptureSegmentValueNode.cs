@@ -25,6 +25,7 @@
         public void Activate(RouteContext<TContext> context, string value)
         {
             //we found a uri segment at _position, so continue
+            value = value.Replace("/", "");
             context.Data[_key] = value;
 
             Next(context, value);
