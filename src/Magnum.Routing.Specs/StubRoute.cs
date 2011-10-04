@@ -15,6 +15,7 @@ namespace Magnum.Routing.Specs
 	using System;
 	using System.Diagnostics;
 	using Model;
+	using Extensions;
 
 
     [DebuggerDisplay("StubRoute:{_name}")]
@@ -47,5 +48,35 @@ namespace Magnum.Routing.Specs
 		{
 			get { throw new NotImplementedException(); }
 		}
+
+        public bool Equals(StubRoute<T> other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+            return Equals(other._name, _name);
+        }
+
+        public override string ToString()
+        {
+            return "Stub Route: {0}".FormatWith(_name);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != typeof(StubRoute<T>))
+                return false;
+            return Equals((StubRoute<T>)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_name != null ? _name.GetHashCode() : 0);
+        }
 	}
 }

@@ -25,7 +25,7 @@ namespace Magnum.Routing
 	}
 
 
-	public interface Route<TContext> :
+	public interface Route<out TContext> :
 		Route
 	{
 	}

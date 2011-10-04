@@ -25,5 +25,6 @@ namespace Magnum.Routing
 	{
 		TContext Context { get; }
         RouteVariables Data { get; }
+	    Route<TContext> Route { get; }
 	}
 }
