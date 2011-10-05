@@ -48,7 +48,7 @@ namespace Magnum.Routing.Engine.Nodes
 			_values.Add(value, activation);
 		}
 
-		protected void Next(string key, RouteContext<TContext> context, string value)
+		protected void CheckForValue(string key, RouteContext<TContext> context, string value)
 		{
 			Activation<TContext> match;
 			if (!_values.TryGetValue(key, out match))

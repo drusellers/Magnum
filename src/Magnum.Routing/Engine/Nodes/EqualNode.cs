@@ -33,7 +33,7 @@ namespace Magnum.Routing.Engine.Nodes
 		public override void Activate(RouteContext<TContext> context, string value)
 		{
             //calls to the base DictionaryNode to perform the equals. odd.
-			Next(value, context, value);
+			CheckForValue(value, context, value);
 		}
 
 		public void AddCheck(string value, Activation<TContext> activation)
