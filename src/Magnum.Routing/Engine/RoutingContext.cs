@@ -95,7 +95,7 @@ namespace Magnum.Routing.Engine
 			if (position >= _segments.Length)
 				return null;
 
-			return _segments[position] ?? "";
+			return _segments[position].Replace("/","") ?? "";
 		}
 
 		public void Resolve()

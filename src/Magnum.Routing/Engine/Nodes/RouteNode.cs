@@ -17,6 +17,7 @@ namespace Magnum.Routing.Engine.Nodes
     /// </summary>
 	public class RouteNode<TContext> :
         ActivationNode<TContext>
+        //why no right activation?
     {
 		readonly Route<TContext> _route;
 

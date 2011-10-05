@@ -16,7 +16,8 @@ namespace Magnum.Routing.Specs
         [Test]
         public void FirstTestName()
         {
-            var route = new RouteNode<Uri>(new StubRoute<Uri>());
+            var routeA = new StubRoute<Uri>("a");
+            var route = new RouteNode<Uri>(routeA);
 
             var joinNode = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
             joinNode.AddSuccessor(route);
@@ -40,15 +41,18 @@ namespace Magnum.Routing.Specs
             engine.Route(uri, x =>
                 {
                     called = true;
-
+                    x.Route.ShouldEqual(routeA);
                     value = x.Data["version"];
                 });
 
             called.ShouldBeTrue();
             value.Value.ShouldEqual("1");
         }
+
+
+
         [Test]
-        public void TwoCaptures()
+        public void MoreComplex()
         {
             //build engine
             var engine = new MagnumRoutingEngine<Uri>(x => x);
@@ -64,67 +68,57 @@ namespace Magnum.Routing.Specs
             var alpha = new AlphaNode<Uri>(_id++);
             alpha.AddSuccessor(joinNode);
 
-            var captureNode = new CaptureSegmentValueNode<Uri>("version", () => _id++);
-            captureNode.AddSuccessor(alpha);
+            var captureNode = new EqualNode<Uri>(() => _id++);
+            captureNode.AddCheck("1", alpha);
 
-            var segment = new SegmentNode<Uri>(1);
-            segment.AddSuccessor(captureNode);
+            var seg1 = new SegmentNode<Uri>(1);
+            seg1.AddSuccessor(captureNode);
 
-            engine.Root.AddSuccessor(segment);
+            engine.Root.AddSuccessor(seg1);
 
             //build up route two
-            //    http://localhost/aa/edit
+            //    http://localhost/bb/show
 
             var routeB = new StubRoute<Uri>("b");
-            var route2 = new RouteNode<Uri>(routeB);
+            var routeNodeB = new RouteNode<Uri>(routeB);
+
+            var editAlpha = new AlphaNode<Uri>(_id++);
+
+            var equalShow = new EqualNode<Uri>(() => _id++);
+            equalShow.AddCheck("show", editAlpha);
+
+            var seg2 = new SegmentNode<Uri>(2);
+            seg2.AddSuccessor(equalShow);
+
+            engine.Root.AddSuccessor(seg2);
+
+            var j2 = new JoinNode<Uri>(_id++, editAlpha);
+            j2.AddSuccessor(routeNodeB);
 
 
-            //*************************
-            var joinNodeBB = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
 
-            var alphaBB = new AlphaNode<Uri>(_id++);
-            alphaBB.AddSuccessor(joinNodeBB);
+            var bbAlpha = new AlphaNode<Uri>(_id++);
+            bbAlpha.AddSuccessor(j2);
 
-            var equalNodeBB = new EqualNode<Uri>(() => _id++);
-            equalNodeBB.AddCheck("bb", alphaBB);
+            var equalBb = new EqualNode<Uri>(() => _id++);
+            equalBb.AddCheck("bb", bbAlpha);
 
-            //shared node
-            segment.AddSuccessor(equalNodeBB);
+            engine.Match<SegmentNode<Uri>>().First(x=>x.Position == 1)
+                .AddSuccessor(equalBb);
 
 
-            //now start building up the next segment piece
-            var joinNode2 = new JoinNode<Uri>(_id++, alphaBB);
-            joinNode2.AddSuccessor(route2);
 
-            var alpha2 = new AlphaNode<Uri>(_id++);
-            alpha2.AddSuccessor(joinNode2);
-
-            var equalNode2 = new EqualNode<Uri>(() => _id++);
-            equalNode2.AddCheck("edit", alpha2);
-
-            var segment2 = new SegmentNode<Uri>(2);
-            segment2.AddSuccessor(equalNode2);
-
-            engine.Root.AddSuccessor(segment2);
-
-            bool called = false;
-            RouteVariable value = null;
-
-            var uri = new Uri("http://localhost/aa/edit");
+            var called = false;
+            var uri = new Uri("http://localhost/bb/show");
             Route selectedRoute = null;
             engine.Route(uri, x =>
                 {
                     called = true;
                     selectedRoute = x.Route;
-                    value = x.Data["version"];
                 });
 
             called.ShouldBeTrue();
-            selectedRoute.ShouldEqual(routeA); //because the route was 'aa' not 'bb';
-            //in this one there should be no match
-            //value.Value.ShouldEqual("a");
-            //but since the context is shared... :(
-            //maybe put the context on each route?
+            selectedRoute.ShouldEqual(routeB); //because the route was 'aa' not 'bb';
         }
     }
 }
