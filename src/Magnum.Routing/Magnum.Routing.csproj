@@ -86,7 +86,6 @@
     <Compile Include="MatchExtensions.cs" />
     <Compile Include="Engine\Nodes\FullParameterNode.cs" />
     <Compile Include="Engine\Token.cs" />
-    <Compile Include="Engine\TokenImpl.cs" />
     <Compile Include="Engine\Tokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route.cs" />

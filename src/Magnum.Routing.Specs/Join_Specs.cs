@@ -20,19 +20,19 @@ namespace Magnum.Routing.Specs
 			var route = new RouteNode<Dictionary<string, string>>(new StubRoute<Dictionary<string, string>>());
 
 			var joinNode = new JoinNode<Dictionary<string, string>>(_id++, new ConstantNode<Dictionary<string,string>>());
-			joinNode.AddActivation(route);
+			joinNode.AddSuccessor(route);
 
 			var alpha = new AlphaNode<Dictionary<string, string>>(_id++);
-			alpha.AddActivation(joinNode);
+			alpha.AddSuccessor(joinNode);
 
 			var equal = new EqualNode<Dictionary<string, string>>(() => _id++);
 			equal.Add("version", alpha);
 
 			var segment = new SegmentNode<Dictionary<string, string>>(1);
-			segment.AddActivation(equal);
+			segment.AddSuccessor(equal);
 
 			var engine = new MagnumRoutingEngine<Uri>(x => x);
-			engine.Match<RootNode<Dictionary<string, string>>>().Single().AddActivation(segment);
+			engine.Match<RootNode<Dictionary<string, string>>>().Single().AddSuccessor(segment);
 
 			bool called = false;
 

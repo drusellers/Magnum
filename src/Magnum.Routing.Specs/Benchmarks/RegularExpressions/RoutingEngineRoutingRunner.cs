@@ -37,10 +37,10 @@ namespace Magnum.Routing.Specs.Benchmarks.RegularExpressions
 			_engine = new MagnumRoutingEngine<Uri>(x => x);
 
 			_segment = new SegmentNode<Uri>(1);
-			_engine.Match<RootNode<Uri>>().Single().AddActivation(_segment);
+			_engine.Match<RootNode<Uri>>().Single().AddSuccessor(_segment);
 
 			_equal = new EqualNode<Uri>(() => _id++);
-			_segment.AddActivation(_equal);
+			_segment.AddSuccessor(_equal);
 		}
 
 		public void AddRoutes(IEnumerable<string> paths)
@@ -50,10 +50,10 @@ namespace Magnum.Routing.Specs.Benchmarks.RegularExpressions
 				var route = new RouteNode<Uri>(new StubRoute<Uri>());
 
 				var joinNode = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
-				joinNode.AddActivation(route);
+				joinNode.AddSuccessor(route);
 
 				var alpha = new AlphaNode<Uri>(_id++);
-				alpha.AddActivation(joinNode);
+				alpha.AddSuccessor(joinNode);
 
 				_equal.Add(path.Substring(1), alpha);
 			}

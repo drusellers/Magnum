@@ -12,9 +12,25 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine
 {
-	public interface Token
+    using System.Diagnostics;
+
+    /// <summary>
+    /// A key value pair - to store found items in the network
+    /// like route variables. But we want a read only model.
+    /// currently we are enforcing that through an interface.
+    /// this may get removed.
+    /// </summary>
+    public interface Token
 	{
 		string Name { get; }
 		string Value { get; }
+	}
+
+    [DebuggerDisplay("Token:{Name}:{Value}")]
+	class SimpleToken :
+		Token
+	{
+		public string Name { get; set; }
+		public string Value { get; set; }
 	}
 }

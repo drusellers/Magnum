@@ -14,9 +14,12 @@ namespace Magnum.Routing.Engine
 {
 	using System;
 
-
 	public interface RightActivation<TContext>
 	{
+        /// <summary>
+        /// This is different from normal activation (or left activation)
+        /// I just don't know why yet. :)
+        /// </summary>
 		void RightActivate(RouteContext<TContext> context, Action<RouteContext> callback);
 	}
 }

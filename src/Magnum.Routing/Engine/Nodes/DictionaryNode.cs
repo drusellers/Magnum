@@ -18,7 +18,8 @@ namespace Magnum.Routing.Engine.Nodes
 
 
 	public abstract class DictionaryNode<TContext> :
-		Node<TContext>
+		Node<TContext>,
+        Activation<TContext>
 	{
 		readonly IDictionary<string, Activation<TContext>> _values;
 
@@ -36,11 +37,11 @@ namespace Magnum.Routing.Engine.Nodes
 				if (alphaNode == null)
 				{
 					alphaNode = new AlphaNode<TContext>(generateId());
-					alphaNode.AddActivation(existing);
+					alphaNode.AddSuccessor(existing);
 					_values[value] = alphaNode;
 				}
 
-				alphaNode.AddActivation(activation);
+				alphaNode.AddSuccessor(activation);
 				return;
 			}
 
@@ -56,7 +57,10 @@ namespace Magnum.Routing.Engine.Nodes
 			match.Activate(context, value);
 		}
 
-		public IEnumerable<T> Match<T>()
+	    public abstract void Activate(RouteContext<TContext> context, string value);
+	    
+
+	    public IEnumerable<T> Match<T>()
 			where T : class
 		{
 			if (typeof(T) == GetType())

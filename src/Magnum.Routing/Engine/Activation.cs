@@ -29,6 +29,9 @@ namespace Magnum.Routing.Engine
 	public interface Activation<TContext> :
 		Activation
 	{
+        /// <summary>
+        /// Activates the current node.
+        /// </summary>
 		void Activate(RouteContext<TContext> context, string value);
 	}
 }

@@ -25,9 +25,8 @@ namespace Magnum.Routing.Engine
 	{
 		TContext Context { get; }
         IDictionary<string, object> Data { get; }
-	    void AddRightActivation(long id);
+	    void AddRightActivation(long id, Action action);
 		bool HasRightActivation(long id);
 		void AddRoute(Route<TContext> route);
-		void AddAction(Action action);
 	}
 }

@@ -15,37 +15,41 @@ namespace Magnum.Routing.Engine.Nodes
 	using System.Collections.Generic;
 	using System.Linq;
 
-    //this is a hybrid node. alpha / match
 	public abstract class ActivationNode<TContext> :
-		Node<TContext>
+		Node<TContext>,
+        Activation<TContext>
 	{
-		readonly IList<Activation<TContext>> _activations;
+		readonly IList<Activation<TContext>> _successors;
 
 		protected ActivationNode()
 		{
-			_activations = new List<Activation<TContext>>();
+			_successors = new List<Activation<TContext>>();
 		}
 
-		protected ActivationNode(IEnumerable<Activation<TContext>> activations)
+		protected ActivationNode(IEnumerable<Activation<TContext>> successors)
 		{
-			_activations = new List<Activation<TContext>>(activations);
+			_successors = new List<Activation<TContext>>(successors);
 		}
 
-		protected ActivationNode(params Activation<TContext>[] activations)
+		protected ActivationNode(params Activation<TContext>[] successors)
 		{
-			_activations = new List<Activation<TContext>>(activations);
+			_successors = new List<Activation<TContext>>(successors);
 		}
 
-		protected void Next(RouteContext<TContext> context, string value)
+        /// <summary>
+        /// This method activates child nodes.
+        /// 
+        /// </summary>
+		protected void ActivateSuccessors(RouteContext<TContext> context, string value)
 		{
 			// not using LINQ, since the performance is much slower than iterating the list directly
-			for (int i = 0; i < _activations.Count; i++)
-				_activations[i].Activate(context, value);
+			for (int i = 0; i < _successors.Count; i++)
+				_successors[i].Activate(context, value);
 		}
 
-		public void AddActivation(Activation<TContext> activation)
+		public void AddSuccessor(Activation<TContext> successor)
 		{
-			_activations.Add(activation);
+			_successors.Add(successor);
 		}
 
 		public IEnumerable<T> Match<T>()
@@ -66,7 +70,10 @@ namespace Magnum.Routing.Engine.Nodes
 		IEnumerable<T> NextAsEnumerable<T>()
 			where T : class
 		{
-			return _activations.SelectMany(activation => activation.Match<T>());
+			return _successors.SelectMany(activation => activation.Match<T>());
 		}
+
+	    public abstract void Activate(RouteContext<TContext> context, string value);
+
 	}
 }

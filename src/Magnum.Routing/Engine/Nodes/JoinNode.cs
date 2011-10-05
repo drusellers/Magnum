@@ -17,7 +17,6 @@ namespace Magnum.Routing.Engine.Nodes
 
 	public class JoinNode<TContext> :
 		ActivationNode<TContext>,
-		Activation<TContext>,
 		RightActivation<TContext>
 	{
 		readonly long _id;
@@ -29,21 +28,20 @@ namespace Magnum.Routing.Engine.Nodes
 			_rightActivation = rightActivation;
 		}
 
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
 			// right activate our join partner
 			_rightActivation.RightActivate(context, x =>
 				{
 					// we were matched, so add our node to the right activation network
-					context.AddRightActivation(_id);
-
-					// add activation of our children to the agenda for execution
-					context.AddAction(() => Next(context, value));
+					// and add activation of our children to the agenda for execution
+					context.AddRightActivation(_id, ()=>ActivateSuccessors(context, value));
 				});
 		}
 
 		public void RightActivate(RouteContext<TContext> context, Action<RouteContext> callback)
 		{
+            //are there any right activations for me? if so, execute call back.
 			if (context.HasRightActivation(_id))
 				callback(context);
 		}

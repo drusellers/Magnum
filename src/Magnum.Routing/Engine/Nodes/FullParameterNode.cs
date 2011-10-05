@@ -13,12 +13,11 @@
 namespace Magnum.Routing.Engine.Nodes
 {
 	public class FullParameterNode<TContext> :
-		ActivationNode<TContext>,
-		Activation<TContext>
+		ActivationNode<TContext>
 	{
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
-			Next(context, value);
+			ActivateSuccessors(context, value);
 		}
 	}
 }

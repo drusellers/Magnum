@@ -65,10 +65,6 @@ namespace Magnum.Routing.Engine
 
         public IDictionary<string, object> Data { get; set; }
 
-        public void AddRightActivation(long id)
-		{
-			_rights.Add(id);
-		}
 
 		public bool HasRightActivation(long id)
 		{
@@ -80,7 +76,13 @@ namespace Magnum.Routing.Engine
 			_routes.Add(route);
 		}
 
-		public void AddAction(Action action)
+        public void AddRightActivation(long id, Action action)
+        {
+            _rights.Add(id);
+            _actions.Add(action);
+        }
+
+        public void AddAction(Action action)
 		{
 			_actions.Add(action);
 		}

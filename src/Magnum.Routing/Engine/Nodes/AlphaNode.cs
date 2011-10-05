@@ -23,7 +23,6 @@ namespace Magnum.Routing.Engine.Nodes
 	[DebuggerDisplay("Alpha:{_id}")]
     public class AlphaNode<TContext> : 
 		ActivationNode<TContext>,
-		Activation<TContext>,
         RightActivation<TContext>
     {
         //this is used so the node can ask for their context data.
@@ -34,15 +33,13 @@ namespace Magnum.Routing.Engine.Nodes
 			_id = id;
 		}
 
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
-            //TODO: what is going on here? - why isn't this one call?
             // facts / data  - normal rete network.
             // data / facts sit on the node.
             // we don't want to store state on the nodes - because we are building a routing / stateless network
             // 
-			context.AddRightActivation(_id);
-			context.AddAction(() => Next(context, value));
+			context.AddRightActivation(_id, () => ActivateSuccessors(context, value));
 
             //DRU: I have hit an alpha node. This is the end of the Alpha network.
 		}

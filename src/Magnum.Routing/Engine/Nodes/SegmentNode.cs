@@ -19,8 +19,7 @@ namespace Magnum.Routing.Engine.Nodes
 	/// </summary>
 	[DebuggerDisplay("Segment: Pos {_position}")]
 	public class SegmentNode<TContext> :
-		ActivationNode<TContext>,
-		Activation<TContext>
+		ActivationNode<TContext>
 	{
 		readonly int _position;
 
@@ -34,15 +33,15 @@ namespace Magnum.Routing.Engine.Nodes
 			get { return _position; }
 		}
 
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
 			string segmentValue = context.Segment(_position);
 			if (segmentValue == null)
 				return;
 
 
-            //we found a uri segment at _position, so continue
-			Next(context, segmentValue);
+            //we found a uri segment at _position, so activate successors
+			ActivateSuccessors(context, segmentValue);
 		}
 	}
 }

@@ -19,19 +19,19 @@ namespace Magnum.Routing.Specs
             var route = new RouteNode<Uri>(new StubRoute<Uri>());
 
             var joinNode = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
-            joinNode.AddActivation(route);
+            joinNode.AddSuccessor(route);
 
             var alpha = new AlphaNode<Uri>(_id++);
-            alpha.AddActivation(joinNode);
+            alpha.AddSuccessor(joinNode);
 
             var captureNode = new CaptureSegmentValueNode<Uri>("version", () => _id++);
-            captureNode.AddActivation(alpha);
+            captureNode.AddSuccessor(alpha);
 
             var segment = new SegmentNode<Uri>(1);
-            segment.AddActivation(captureNode);
+            segment.AddSuccessor(captureNode);
 
             var engine = new MagnumRoutingEngine<Uri>(x => x);
-            engine.Match<RootNode<Uri>>().Single().AddActivation(segment);
+            engine.Match<RootNode<Uri>>().Single().AddSuccessor(segment);
 
             bool called = false;
             RouteVariable value = null;
@@ -59,18 +59,18 @@ namespace Magnum.Routing.Specs
             var route = new RouteNode<Uri>(routeA);
 
             var joinNode = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
-            joinNode.AddActivation(route);
+            joinNode.AddSuccessor(route);
 
             var alpha = new AlphaNode<Uri>(_id++);
-            alpha.AddActivation(joinNode);
+            alpha.AddSuccessor(joinNode);
 
             var captureNode = new CaptureSegmentValueNode<Uri>("version", () => _id++);
-            captureNode.AddActivation(alpha);
+            captureNode.AddSuccessor(alpha);
 
             var segment = new SegmentNode<Uri>(1);
-            segment.AddActivation(captureNode);
+            segment.AddSuccessor(captureNode);
 
-            engine.Root.AddActivation(segment);
+            engine.Root.AddSuccessor(segment);
 
             //build up route two
             //    http://localhost/aa/edit
@@ -83,29 +83,29 @@ namespace Magnum.Routing.Specs
             var joinNodeBB = new JoinNode<Uri>(_id++, new ConstantNode<Uri>());
 
             var alphaBB = new AlphaNode<Uri>(_id++);
-            alphaBB.AddActivation(joinNodeBB);
+            alphaBB.AddSuccessor(joinNodeBB);
 
             var equalNodeBB = new EqualNode<Uri>(() => _id++);
             equalNodeBB.Add("bb", alphaBB);
 
             //shared node
-            segment.AddActivation(equalNodeBB);
+            segment.AddSuccessor(equalNodeBB);
 
 
             //now start building up the next segment piece
             var joinNode2 = new JoinNode<Uri>(_id++, alphaBB);
-            joinNode2.AddActivation(route2);
+            joinNode2.AddSuccessor(route2);
 
             var alpha2 = new AlphaNode<Uri>(_id++);
-            alpha2.AddActivation(joinNode2);
+            alpha2.AddSuccessor(joinNode2);
 
             var equalNode2 = new EqualNode<Uri>(() => _id++);
             equalNode2.Add("edit", alpha2);
 
             var segment2 = new SegmentNode<Uri>(2);
-            segment2.AddActivation(equalNode2);
+            segment2.AddSuccessor(equalNode2);
 
-            engine.Root.AddActivation(segment2);
+            engine.Root.AddSuccessor(segment2);
 
             bool called = false;
             RouteVariable value = null;

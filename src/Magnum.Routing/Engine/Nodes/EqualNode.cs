@@ -21,8 +21,7 @@ namespace Magnum.Routing.Engine.Nodes
     /// </summary>
     [DebuggerDisplay("Equals: {KeyList}")]
 	public class EqualNode<TContext> :
-		DictionaryNode<TContext>,
-		Activation<TContext>
+		DictionaryNode<TContext>
 	{
 		readonly Func<long> _generateId;
 
@@ -31,7 +30,7 @@ namespace Magnum.Routing.Engine.Nodes
 			_generateId = generateId;
 		}
 
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
             //calls to the base DictionaryNode to perform the equals. odd.
 			Next(value, context, value);

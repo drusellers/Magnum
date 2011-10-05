@@ -34,7 +34,7 @@ namespace Magnum.Routing
 			if (match == null)
 				return;
 
-			match.AddActivation(activation);
+			match.AddSuccessor(activation);
 		}
 	}
 }

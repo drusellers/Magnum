@@ -17,12 +17,12 @@ namespace Magnum.Routing.Engine.Nodes
     /// This is the entry point into the network.
     /// </summary>
 	public class RootNode<TContext> :
-		ActivationNode<TContext>,
-		Activation<TContext>
+		ActivationNode<TContext>
 	{
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
-			Next(context, value);
+            //the root node always works. :)
+			ActivateSuccessors(context, value);
 		}
 	}
 }
