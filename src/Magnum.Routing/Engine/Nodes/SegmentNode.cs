@@ -19,7 +19,7 @@ namespace Magnum.Routing.Engine.Nodes
 	/// </summary>
 	[DebuggerDisplay("Segment: Pos {_position}")]
 	public class SegmentNode<TContext> :
-		ActivationNode<TContext>
+		ActivationNodeBase<TContext>
 	{
 		readonly int _position;
 

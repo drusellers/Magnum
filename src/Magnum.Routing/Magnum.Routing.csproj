@@ -44,7 +44,7 @@
     <Compile Include="Configuration\RouteConfiguratorImpl.cs" />
     <Compile Include="Configuration\RoutingEngineBuilderConfigurator.cs" />
     <Compile Include="Configuration\RouteExtensions.cs" />
-    <Compile Include="Configuration\SequentialNodeIdGenerator.cs" />
+    <Compile Include="Engine\Nodes\SequentialNodeIdGenerator.cs" />
     <Compile Include="Configuration\RouteFactory.cs" />
     <Compile Include="Configuration\UrlPatternParser.cs" />
     <Compile Include="Engine\Nodes\CaptureSegmentValueNode.cs" />
@@ -54,7 +54,7 @@
     <Compile Include="Model\StaticRouteParameter.cs" />
     <Compile Include="Model\VariableRouteParameter.cs" />
     <Compile Include="Model\RouteParameters.cs" />
-    <Compile Include="ModelExtensions.cs" />
+    <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Model\RouteParametersImpl.cs" />
     <Compile Include="Model\RouteVariables.cs" />
     <Compile Include="Model\RouteVariablesImpl.cs" />
@@ -62,11 +62,10 @@
     <Compile Include="Model\UrlPattern.cs" />
     <Compile Include="Model\RouteVariable.cs" />
     <Compile Include="Engine\Activation.cs" />
-    <Compile Include="Engine\Nodes\ActivationNode.cs" />
+    <Compile Include="Engine\Nodes\ActivationNodeBase.cs" />
     <Compile Include="Engine\Nodes\AlphaNode.cs" />
     <Compile Include="Engine\Nodes\ConstantNode.cs" />
     <Compile Include="Engine\Nodes\DictionaryNode.cs" />
-    <Compile Include="Engine\DictionaryTokens.cs" />
     <Compile Include="Engine\Nodes\JoinNode.cs" />
     <Compile Include="Engine\Nodes\Node.cs" />
     <Compile Include="Engine\RightActivation.cs" />
@@ -82,17 +81,16 @@
     <Compile Include="Configuration\RoutingEngineFactory.cs" />
     <Compile Include="Exceptions\RoutingConfigurationException.cs" />
     <Compile Include="Exceptions\RoutingException.cs" />
-    <Compile Include="Engine\MagnumRoutingEngine.cs" />
-    <Compile Include="MatchExtensions.cs" />
-    <Compile Include="Engine\Nodes\FullParameterNode.cs" />
+    <Compile Include="MagnumRoutingEngine.cs" />
+    <Compile Include="Extensions\MatchExtensions.cs" />
     <Compile Include="Engine\Token.cs" />
     <Compile Include="Engine\Tokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Route.cs" />
+    <Compile Include="Configuration\Route.cs" />
     <Compile Include="Engine\RouteContext.cs" />
     <Compile Include="Engine\RoutingContext.cs" />
     <Compile Include="Model\RouteImpl.cs" />
-    <Compile Include="RouteMatch.cs" />
+    <Compile Include="Engine\RouteMatch.cs" />
     <Compile Include="Engine\RouteMatchImpl.cs" />
     <Compile Include="RoutingEngine.cs" />
   </ItemGroup>

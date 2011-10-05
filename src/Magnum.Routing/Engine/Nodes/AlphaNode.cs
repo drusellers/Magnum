@@ -22,7 +22,7 @@ namespace Magnum.Routing.Engine.Nodes
 	/// </summary>
 	[DebuggerDisplay("Alpha:{_id}")]
     public class AlphaNode<TContext> : 
-		ActivationNode<TContext>,
+		ActivationNodeBase<TContext>,
         RightActivation<TContext>
     {
         //this is used so the node can ask for their context data.

@@ -16,7 +16,7 @@ namespace Magnum.Routing.Engine.Nodes
 
 
 	public class JoinNode<TContext> :
-		ActivationNode<TContext>,
+		ActivationNodeBase<TContext>,
 		RightActivation<TContext>
 	{
 		readonly long _id;

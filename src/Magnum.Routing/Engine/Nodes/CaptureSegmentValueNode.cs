@@ -10,7 +10,7 @@
     /// <typeparam name="TContext"></typeparam>
     [DebuggerDisplay("Captures Segment: Pos {_position} As {_key}")]
     public class CaptureSegmentValueNode<TContext> : 
-        ActivationNode<TContext>
+        ActivationNodeBase<TContext>
     {
         readonly Func<long> _generateId;
         string _key;

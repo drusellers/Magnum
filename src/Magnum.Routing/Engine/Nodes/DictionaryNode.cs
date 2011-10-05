@@ -33,6 +33,7 @@ namespace Magnum.Routing.Engine.Nodes
 			Activation<TContext> existing;
 			if (_values.TryGetValue(value, out existing))
 			{
+                //ok, what is the point of this?
 				var alphaNode = existing as AlphaNode<TContext>;
 				if (alphaNode == null)
 				{

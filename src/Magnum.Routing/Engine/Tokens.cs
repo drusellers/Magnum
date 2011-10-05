@@ -12,7 +12,12 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine
 {
-	/// <summary>
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using Internals;
+
+
+    /// <summary>
 	/// Used to pass tokens to the right in the RETE tree for use by the terminal nodes
 	/// A join node may pass a new list to the right containing multiple tokens
 	/// IE, a {controller}/{action} would join two segment alpha nodes and have a token
@@ -27,5 +32,37 @@ namespace Magnum.Routing.Engine
 		int Count { get; }
 
 		bool Has(string name);
+	}
+
+    [DebuggerDisplay("Tokens: {Count}")]
+	class DictionaryTokens :
+		Tokens
+	{
+		readonly Cache<string, Token> _values;
+
+		public DictionaryTokens(IEnumerable<Token> tokens)
+		{
+			_values = new DictionaryCache<string, Token>(x => x.Name, tokens);
+		}
+
+		public Token this[string name]
+		{
+			get { return _values[name]; }
+		}
+
+		public string[] AllNames
+		{
+			get { return _values.GetAllKeys(); }
+		}
+
+		public int Count
+		{
+			get { return _values.Count; }
+		}
+
+		public bool Has(string name)
+		{
+			return _values.Has(name);
+		}
 	}
 }

@@ -15,30 +15,29 @@ namespace Magnum.Routing.Engine.Nodes
 	using System.Collections.Generic;
 	using System.Linq;
 
-	public abstract class ActivationNode<TContext> :
+	public abstract class ActivationNodeBase<TContext> :
 		Node<TContext>,
         Activation<TContext>
 	{
 		readonly IList<Activation<TContext>> _successors;
 
-		protected ActivationNode()
+		protected ActivationNodeBase()
 		{
 			_successors = new List<Activation<TContext>>();
 		}
 
-		protected ActivationNode(IEnumerable<Activation<TContext>> successors)
+		protected ActivationNodeBase(IEnumerable<Activation<TContext>> successors)
 		{
 			_successors = new List<Activation<TContext>>(successors);
 		}
 
-		protected ActivationNode(params Activation<TContext>[] successors)
+		protected ActivationNodeBase(params Activation<TContext>[] successors)
 		{
 			_successors = new List<Activation<TContext>>(successors);
 		}
 
         /// <summary>
         /// This method activates child nodes.
-        /// 
         /// </summary>
 		protected void ActivateSuccessors(RouteContext<TContext> context, string value)
 		{
@@ -73,6 +72,7 @@ namespace Magnum.Routing.Engine.Nodes
 			return _successors.SelectMany(activation => activation.Match<T>());
 		}
 
+        /// AKA "Left Activation" 
 	    public abstract void Activate(RouteContext<TContext> context, string value);
 
 	}

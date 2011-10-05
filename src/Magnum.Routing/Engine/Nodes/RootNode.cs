@@ -17,7 +17,7 @@ namespace Magnum.Routing.Engine.Nodes
     /// This is the entry point into the network.
     /// </summary>
 	public class RootNode<TContext> :
-		ActivationNode<TContext>
+		ActivationNodeBase<TContext>
 	{
 		public override void Activate(RouteContext<TContext> context, string value)
 		{

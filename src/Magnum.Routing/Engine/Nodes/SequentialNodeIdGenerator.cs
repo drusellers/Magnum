@@ -12,12 +12,13 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
-	public class FullParameterNode<TContext> :
-		ActivationNode<TContext>
+	public class SequentialNodeIdGenerator
 	{
-		public override void Activate(RouteContext<TContext> context, string value)
+		static long _next = 1;
+
+		public long Next()
 		{
-			ActivateSuccessors(context, value);
+			return _next++;
 		}
 	}
 }

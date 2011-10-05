@@ -31,6 +31,7 @@ namespace Magnum.Routing.Engine
 	{
         /// <summary>
         /// Activates the current node.
+        /// AKA "Left Activation" 
         /// </summary>
 		void Activate(RouteContext<TContext> context, string value);
 	}
