@@ -12,12 +12,12 @@
 // specific language governing permissions and limitations under the License.
 namespace Magnum.Routing.Engine.Nodes
 {
-	using System.Collections.Generic;
-
-
+    /// <summary>
+    /// This is kind of a production node?
+    /// </summary>
 	public class RouteNode<TContext> :
-		Activation<TContext>
-	{
+        ActivationNode<TContext>
+    {
 		readonly Route<TContext> _route;
 
 		public RouteNode(Route<TContext> route)
@@ -25,16 +25,9 @@ namespace Magnum.Routing.Engine.Nodes
 			_route = route;
 		}
 
-		public void Activate(RouteContext<TContext> context, string value)
+		public override void Activate(RouteContext<TContext> context, string value)
 		{
 			context.AddRoute(_route);
-		}
-
-		public IEnumerable<T> Match<T>()
-			where T : class
-		{
-			if (typeof(T) == GetType())
-				yield return this as T;
 		}
 	}
 }

@@ -86,7 +86,7 @@ namespace Magnum.Routing.Specs
             alphaBB.AddSuccessor(joinNodeBB);
 
             var equalNodeBB = new EqualNode<Uri>(() => _id++);
-            equalNodeBB.Add("bb", alphaBB);
+            equalNodeBB.AddCheck("bb", alphaBB);
 
             //shared node
             segment.AddSuccessor(equalNodeBB);
@@ -100,7 +100,7 @@ namespace Magnum.Routing.Specs
             alpha2.AddSuccessor(joinNode2);
 
             var equalNode2 = new EqualNode<Uri>(() => _id++);
-            equalNode2.Add("edit", alpha2);
+            equalNode2.AddCheck("edit", alpha2);
 
             var segment2 = new SegmentNode<Uri>(2);
             segment2.AddSuccessor(equalNode2);

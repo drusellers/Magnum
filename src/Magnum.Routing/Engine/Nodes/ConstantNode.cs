@@ -23,6 +23,7 @@ namespace Magnum.Routing.Engine.Nodes
 	{
 		public void RightActivate(RouteContext<TContext> context, Action<RouteContext> callback)
 		{
+            //because they ALWAYS activate there are no if checks here
 			callback(context);
 		}
 	}

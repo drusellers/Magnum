@@ -55,7 +55,7 @@ namespace Magnum.Routing.Specs.Benchmarks.RegularExpressions
 				var alpha = new AlphaNode<Uri>(_id++);
 				alpha.AddSuccessor(joinNode);
 
-				_equal.Add(path.Substring(1), alpha);
+				_equal.AddCheck(path.Substring(1), alpha);
 			}
 		}
 

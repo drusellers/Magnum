@@ -19,8 +19,14 @@ namespace Magnum.Routing
 	{
 		string Url { get; }
 
+        /// <summary>
+        /// These are things in the url
+        /// </summary>
 		RouteParameters Parameters { get; }
 
+        /// <summary>
+        /// These are things outside the url like HTTP verbs
+        /// </summary>
 		RouteVariables Variables { get; }
 	}
 

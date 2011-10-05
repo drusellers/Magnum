@@ -36,9 +36,9 @@ namespace Magnum.Routing.Engine.Nodes
 			Next(value, context, value);
 		}
 
-		public void Add(string value, Activation<TContext> activation)
+		public void AddCheck(string value, Activation<TContext> activation)
 		{
-			Add(value, activation, _generateId);
+			AddEntry(value, activation, _generateId);
 		}
 	}
 }

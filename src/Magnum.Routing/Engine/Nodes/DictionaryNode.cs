@@ -28,7 +28,7 @@ namespace Magnum.Routing.Engine.Nodes
 			_values = new Dictionary<string, Activation<TContext>>();
 		}
 
-		protected void Add(string value, Activation<TContext> activation, Func<long> generateId)
+		protected void AddEntry(string value, Activation<TContext> activation, Func<long> generateId)
 		{
 			Activation<TContext> existing;
 			if (_values.TryGetValue(value, out existing))
