@@ -16,7 +16,7 @@ namespace Magnum.Routing.Model
 
 
     [DebuggerDisplay("Var:{Value}")]
-	class VariableRouteParameter :
+	public class VariableRouteParameter :
 		RouteParameter
 	{
 		public VariableRouteParameter(int segmentIndex, string name)

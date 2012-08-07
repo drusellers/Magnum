@@ -3,7 +3,7 @@
     using System.Diagnostics;
 
     [DebuggerDisplay("Static:{Value}")]
-    class StaticRouteParameter :
+    public class StaticRouteParameter :
         RouteParameter
     {
         public StaticRouteParameter(int segmentIndex, string value)

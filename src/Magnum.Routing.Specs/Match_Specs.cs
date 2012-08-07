@@ -24,6 +24,27 @@ namespace Magnum.Routing.Specs
 	[TestFixture]
 	public class Matching_a_segment_condition
 	{
+		MagnumRoutingEngine<Uri> _engine;
+		long _id = 1;
+
+
+        [TestFixtureSetUp]
+        public void Given_an_existing_segment_condition()
+        {
+            //here we are just using a simple context - where its just the uri.
+            _engine = new MagnumRoutingEngine<Uri>(x => x);
+
+            var segmentNode = new SegmentNode<Uri>(1);
+            var equals = new EqualNode<Uri>(() => _id++);
+
+            //this alpha node has nothing to do. so we hit it and then 'thbbbb'
+            var alphaNode = new AlphaNode<Uri>(_id++);
+            equals.AddCheck("version", alphaNode);
+            segmentNode.AddSuccessor(equals);
+
+            _engine.Add(segmentNode);
+        }
+
 		[Test]
 		public void Should_find_the_existing_equal_condition()
 		{
@@ -59,25 +80,6 @@ namespace Magnum.Routing.Specs
 		    shouldHaveRouted.ShouldBeTrue();
 		}
 
-		MagnumRoutingEngine<Uri> _engine;
-		long _id = 1;
 
-		[TestFixtureSetUp]
-		public void Given_an_existing_segment_condition()
-		{
-            //here we are just using a simple context - where its just the uri.
-			_engine = new MagnumRoutingEngine<Uri>(x => x);
-
-			var segmentNode = new SegmentNode<Uri>(1);
-			var equals = new EqualNode<Uri>(() => _id++);
-
-            //this alpha node has nothing to do. so we hit it and then 'thbbbb'
-		    var alphaNode = new AlphaNode<Uri>(_id++);
-		    equals.AddCheck("version", alphaNode);
-			segmentNode.AddSuccessor(equals);
-
-
-			_engine.Add(segmentNode);
-		}
 	}
 }

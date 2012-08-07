@@ -14,8 +14,8 @@ namespace Magnum.Routing.Engine
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using Internals;
-
+    using Caching;
+    
 
     /// <summary>
 	/// Used to pass tokens to the right in the RETE tree for use by the terminal nodes

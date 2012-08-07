@@ -1,12 +1,13 @@
 namespace Magnum.Routing.Specs.UriParsing
 {
-	using System;
 	using Configuration;
 	using Model;
 	using TestFramework;
+	using System.Linq;
+	using Extensions;
 
 
-	[Scenario]
+    [Scenario]
 	public class SimpleParsing_Specs
 	{
 		[Then]
@@ -14,9 +15,16 @@ namespace Magnum.Routing.Specs.UriParsing
 		{
 		    var x = new UrlPatternParser();
 		    var o = x.Parse(new UrlPattern("/agent/version/{id}"));
-            //1
-            //2
-            //3
+		    o.Parameters.First().ShouldBeAnInstanceOf<StaticRouteParameter>();
+		    o.Parameters.Skip(1).First().ShouldBeAnInstanceOf<StaticRouteParameter>();
+		    o.Parameters.Skip(2).First().ShouldBeAnInstanceOf<VariableRouteParameter>();
+
+		    var p = o.Parameters.Skip(2)
+		        .First()
+		        .CastAs<VariableRouteParameter>();
+
+		    p.SegmentIndex.ShouldEqual(3);
+		    p.Value.ShouldEqual("id");
 		}
 	}
 }
